@@ -101,23 +101,23 @@ Add screenshots of your deployed project here.
 
 ### Home Page
 
-![Home Page](screenshots/home.png)
+![Home Page](home.png)
 
 ### Government Schemes
 
-![Government Schemes](screenshots/schemes.png)
+![Government Schemes](schemes.png)
 
 ### Farmer Information
 
-![Farmer Information](screenshots/farmer.png)
+![Farmer Information](farmer.png)
 
 ### Complaint System
 
-![Complaint System](screenshots/complaint.png)
+![Complaint System](complaint.png)
 
 ### Admin Dashboard
 
-![Admin Dashboard](screenshots/admin.png)
+![Admin Dashboard](admin.png)
 
 ---
 
