@@ -10,9 +10,7 @@ The main aim of this project is to reduce information gaps between villagers and
 
 ## 🌐 Live Demo
 
-**Live Website:** Add your deployed website link here
-
-**GitHub Repository:** Add your GitHub repository link here
+**Live Website:** https://kedarj4055.github.io/Smart_Village_portal/
 
 ---
 
@@ -96,109 +94,6 @@ Admin can:
 * Provide replies/updates
 * Manage village information
 
----
-
-## 🛠️ Technologies Used
-
-### Frontend
-
-* HTML
-* CSS
-* JavaScript
-* React.js / Vite
-
-### Backend
-
-* Node.js
-* Express.js
-
-### Database
-
-* Add your database name here
-  *(Example: MongoDB / MySQL)*
-
-### Tools
-
-* Visual Studio Code
-* Git
-* GitHub
-* GitHub Pages / Netlify / Vercel
-
----
-
-## 📂 Project Structure
-
-```text
-Smart-Village-Portal/
-│
-├── frontend/
-│   ├── src/
-│   ├── public/
-│   ├── package.json
-│   └── ...
-│
-├── backend/
-│   ├── routes/
-│   ├── controllers/
-│   ├── models/
-│   ├── package.json
-│   └── ...
-│
-├── README.md
-└── ...
-```
-
-> The exact folder structure may vary depending on the project implementation.
-
----
-
-## ⚙️ Installation and Setup
-
-### 1. Clone the Repository
-
-```bash
-git clone YOUR_GITHUB_REPOSITORY_LINK
-```
-
-### 2. Open the Project
-
-```bash
-cd Smart-Village-Portal
-```
-
-### 3. Install Frontend Dependencies
-
-```bash
-cd frontend
-npm install
-```
-
-### 4. Start Frontend
-
-```bash
-npm run dev
-```
-
-The frontend will run on the local development server.
-
-### 5. Install Backend Dependencies
-
-Open another terminal:
-
-```bash
-cd backend
-npm install
-```
-
-### 6. Start Backend
-
-```bash
-npm run dev
-```
-
-The backend API will run on the configured local server.
-
----
 
 ## 📸 Project Screenshots
 
@@ -278,8 +173,6 @@ The application is tested for:
 * User input should be validated before processing.
 * Authentication should be implemented for administrative operations.
 * Sensitive configuration values should be stored using environment variables.
-
-**Note:** Do not upload passwords, API keys, database credentials, or `.env` files containing secrets to GitHub.
 
 ---
 
