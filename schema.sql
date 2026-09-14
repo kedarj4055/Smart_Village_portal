@@ -1,0 +1,81 @@
+CREATE DATABASE IF NOT EXISTS smart_village CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE smart_village;
+
+CREATE TABLE IF NOT EXISTS users (
+  phone VARCHAR(10) PRIMARY KEY,
+  full_name VARCHAR(150) NOT NULL,
+  address VARCHAR(255) DEFAULT '',
+  password_hash VARCHAR(255) NOT NULL,
+  created_at DATETIME NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS admin_credentials (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  username VARCHAR(100) NOT NULL UNIQUE,
+  password_hash VARCHAR(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS schemes (
+  id VARCHAR(40) PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  description TEXT,
+  eligibility TEXT,
+  documents TEXT,
+  last_date VARCHAR(255),
+  apply_link VARCHAR(500),
+  created_at DATETIME NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS crops (
+  id VARCHAR(40) PRIMARY KEY,
+  name VARCHAR(150) NOT NULL,
+  season VARCHAR(100),
+  price VARCHAR(255),
+  tips TEXT
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS water_status (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  timing VARCHAR(255),
+  tank_level INT DEFAULT 0,
+  notice TEXT,
+  alert VARCHAR(500),
+  updated_at DATETIME
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS news (
+  id VARCHAR(40) PRIMARY KEY,
+  title VARCHAR(255) NOT NULL,
+  category VARCHAR(100),
+  content TEXT,
+  date DATETIME
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS complaints (
+  id VARCHAR(40) PRIMARY KEY,
+  citizen_name VARCHAR(150),
+  phone VARCHAR(10),
+  type VARCHAR(100),
+  description TEXT,
+  photo LONGTEXT,
+  status VARCHAR(50) DEFAULT 'प्रलंबित',
+  admin_reply TEXT,
+  created_at DATETIME,
+  updated_at DATETIME,
+  INDEX idx_phone (phone)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS emergency_contacts (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(150),
+  number VARCHAR(20),
+  type VARCHAR(100),
+  sort_order INT DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE IF NOT EXISTS village_settings (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  village_name VARCHAR(150),
+  lat DECIMAL(10,6),
+  lon DECIMAL(10,6)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
