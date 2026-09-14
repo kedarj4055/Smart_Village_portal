@@ -1,0 +1,2039 @@
+<!DOCTYPE html>
+<html lang="mr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>स्मार्ट व्हिलेज पोर्टल</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Hind:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FBF7EC;
+            --bg-soft: #F3ECD8;
+            --surface: #FFFFFF;
+            --ink: #2A2118;
+            --ink-soft: #6B5D4B;
+            --border: #E4D9BE;
+            --primary: #2F5D3A;
+            --primary-dark: #1E3F27;
+            --primary-light: #E7F0E5;
+            --gold: #C6892E;
+            --gold-dark: #9C6B1F;
+            --gold-light: #FBF0DC;
+            --clay: #A2492A;
+            --clay-light: #F5E2D9;
+            --water: #1E5F74;
+            --water-light: #E3EFF1;
+            --success: #3C7A4E;
+            --success-light: #E7F3EA;
+            --danger: #B23A2E;
+            --danger-light: #FBEAE7;
+            --radius: 14px;
+            --radius-sm: 9px;
+            --shadow: 0 4px 16px rgba(42, 33, 24, 0.08);
+            --shadow-lg: 0 14px 36px rgba(42, 33, 24, 0.16);
+            --font-display: 'Yatra One', 'Hind', serif;
+            --font-body: 'Hind', sans-serif;
+            --font-mono: 'IBM Plex Mono', monospace;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--ink);
+            font-family: var(--font-body);
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: var(--font-display);
+            font-weight: 400;
+            margin: 0 0 .4em;
+            color: var(--primary-dark);
+            letter-spacing: .2px;
+        }
+
+        h1 {
+            font-size: 2.4rem;
+        }
+
+        h2 {
+            font-size: 1.85rem;
+        }
+
+        h3 {
+            font-size: 1.35rem;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+        }
+
+        p {
+            margin: 0 0 1em;
+        }
+
+        a {
+            color: var(--primary);
+        }
+
+        img {
+            max-width: 100%;
+        }
+
+        button {
+            font-family: inherit;
+        }
+
+        :focus-visible {
+            outline: 3px solid var(--gold);
+            outline-offset: 2px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+
+        .container {
+            max-width: 1180px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .eyebrow {
+            font-family: var(--font-mono);
+            font-size: .75rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            color: var(--gold-dark);
+            font-weight: 500;
+            display: block;
+            margin-bottom: .5em;
+        }
+
+        /* ===== Header ===== */
+        .site-header {
+            position: sticky;
+            top: 0;
+            z-index: 40;
+            background: rgba(251, 247, 236, .92);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 20px;
+            max-width: 1180px;
+            margin: 0 auto;
+            gap: 16px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            text-decoration: none;
+            color: var(--ink);
+        }
+
+        .brand-mark {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            background: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .brand-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .brand-text b {
+            font-family: var(--font-display);
+            font-size: 1.32rem;
+            color: var(--primary-dark);
+        }
+
+        .brand-text span {
+            font-family: var(--font-mono);
+            font-size: .68rem;
+            letter-spacing: .08em;
+            color: var(--ink-soft);
+            text-transform: uppercase;
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-link {
+            padding: 8px 12px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--ink-soft);
+            font-weight: 500;
+            font-size: .95rem;
+            white-space: nowrap;
+            cursor: pointer;
+        }
+
+        .nav-link:hover {
+            background: var(--primary-light);
+            color: var(--primary-dark);
+        }
+
+        .nav-link.active {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            width: 42px;
+            height: 42px;
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hamburger span,
+        .hamburger span::before,
+        .hamburger span::after {
+            content: '';
+            display: block;
+            width: 20px;
+            height: 2px;
+            background: var(--ink);
+            position: relative;
+            transition: .2s;
+        }
+
+        .hamburger span::before {
+            position: absolute;
+            top: -6px;
+        }
+
+        .hamburger span::after {
+            position: absolute;
+            top: 6px;
+        }
+
+        /* ===== Buttons ===== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 10px 18px;
+            border-radius: 999px;
+            border: 1.5px solid transparent;
+            font-weight: 600;
+            font-size: .92rem;
+            cursor: pointer;
+            text-decoration: none;
+            transition: .15s transform, .15s box-shadow;
+        }
+
+        .btn:active {
+            transform: scale(.97);
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-dark);
+        }
+
+        .btn-gold {
+            background: var(--gold);
+            color: #fff;
+        }
+
+        .btn-gold:hover {
+            background: var(--gold-dark);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border-color: var(--primary);
+            color: var(--primary-dark);
+        }
+
+        .btn-outline:hover {
+            background: var(--primary-light);
+        }
+
+        .btn-danger {
+            background: var(--danger-light);
+            color: var(--danger);
+        }
+
+        .btn-danger:hover {
+            background: var(--danger);
+            color: #fff;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--ink-soft);
+            border-color: var(--border);
+        }
+
+        .btn-ghost:hover {
+            background: var(--bg-soft);
+        }
+
+        .btn-sm {
+            padding: 6px 13px;
+            font-size: .82rem;
+        }
+
+        .btn-block {
+            width: 100%;
+        }
+
+        .btn[disabled] {
+            opacity: .55;
+            cursor: not-allowed;
+        }
+
+        /* ===== Hero & Warli strip ===== */
+        .hero {
+            position: relative;
+            text-align: center;
+            overflow: hidden;
+            border-radius: 0 0 28px 28px;
+            min-height: 480px;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            line-height: 0;
+        }
+
+        .hero-bg svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .hero-scrim {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background: radial-gradient(ellipse 640px 420px at 50% 26%, rgba(251, 247, 236, .92) 0%, rgba(251, 247, 236, .55) 48%, rgba(251, 247, 236, 0) 78%);
+            pointer-events: none;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            padding: 64px 20px 30px;
+            width: 100%;
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 4.4vw, 3.1rem);
+            max-width: 820px;
+            margin: 0 auto .3em;
+        }
+
+        .hero p.lead {
+            max-width: 620px;
+            margin: 0 auto 1.6em;
+            color: var(--ink-soft);
+            font-size: 1.08rem;
+        }
+
+        .warli-strip {
+            width: 100%;
+            height: auto;
+            display: block;
+            color: var(--clay);
+            opacity: .65;
+            margin: 26px 0;
+        }
+
+        .warli-strip.footer-strip {
+            opacity: .85;
+            color: var(--gold-light);
+            margin: 0 0 28px;
+        }
+
+        @media (max-width:600px) {
+            .hero {
+                min-height: 420px;
+            }
+
+            .hero-content {
+                padding: 48px 16px 24px;
+            }
+        }
+
+        /* ===== Stat row ===== */
+        .stat-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+            margin: 0 auto 40px;
+            max-width: 900px;
+        }
+
+        .stat-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 16px;
+            text-align: center;
+        }
+
+        .stat-card b {
+            display: block;
+            font-family: var(--font-mono);
+            font-size: 1.6rem;
+            color: var(--primary);
+        }
+
+        .stat-card span {
+            font-size: .82rem;
+            color: var(--ink-soft);
+        }
+
+        /* ===== Module grid ===== */
+        .section {
+            padding: 44px 0;
+        }
+
+        .section-head {
+            margin-bottom: 24px;
+        }
+
+        .grid {
+            display: grid;
+            gap: 18px;
+        }
+
+        .grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        .module-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 22px;
+            text-decoration: none;
+            color: var(--ink);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: .18s transform, .18s box-shadow;
+        }
+
+        .module-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .module-icon {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .module-card h3 {
+            margin: 0;
+        }
+
+        .module-card p {
+            margin: 0;
+            color: var(--ink-soft);
+            font-size: .9rem;
+        }
+
+        /* ===== Cards / list items ===== */
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 20px;
+            box-shadow: var(--shadow);
+        }
+
+        .notice-item {
+            display: flex;
+            gap: 14px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 5px solid var(--gold);
+            border-radius: var(--radius-sm);
+            padding: 16px 18px;
+            margin-bottom: 12px;
+            box-shadow: var(--shadow);
+        }
+
+        .notice-item.pin-water {
+            border-left-color: var(--water);
+        }
+
+        .notice-item.pin-danger {
+            border-left-color: var(--danger);
+        }
+
+        .notice-item.pin-success {
+            border-left-color: var(--success);
+        }
+
+        .notice-item .pin-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--gold);
+            flex-shrink: 0;
+            margin-top: 6px;
+        }
+
+        .notice-body {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .notice-title {
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .notice-meta {
+            font-family: var(--font-mono);
+            font-size: .75rem;
+            color: var(--ink-soft);
+        }
+
+        /* ===== Badges ===== */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 11px;
+            border-radius: 999px;
+            font-size: .76rem;
+            font-weight: 600;
+        }
+
+        .badge::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        .badge-pending {
+            background: var(--gold-light);
+            color: var(--gold-dark);
+        }
+
+        .badge-progress {
+            background: var(--water-light);
+            color: var(--water);
+        }
+
+        .badge-resolved {
+            background: var(--success-light);
+            color: var(--success);
+        }
+
+        /* ===== Forms ===== */
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: .88rem;
+            margin-bottom: 6px;
+            color: var(--ink);
+        }
+
+        .hint {
+            font-size: .78rem;
+            color: var(--ink-soft);
+            margin-top: 4px;
+        }
+
+        .input,
+        .select,
+        .textarea {
+            width: 100%;
+            padding: 11px 13px;
+            border: 1.5px solid var(--border);
+            border-radius: var(--radius-sm);
+            font-family: inherit;
+            font-size: .95rem;
+            background: var(--surface);
+            color: var(--ink);
+        }
+
+        .input:focus,
+        .select:focus,
+        .textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .textarea {
+            resize: vertical;
+            min-height: 90px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .file-input {
+            padding: 9px;
+        }
+
+        /* ===== Tabs ===== */
+        .tabs {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 22px;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0;
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 10px 16px;
+            font-weight: 600;
+            color: var(--ink-soft);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-size: .92rem;
+        }
+
+        .tab-btn.active {
+            color: var(--primary-dark);
+            border-color: var(--primary);
+        }
+
+        /* ===== Table ===== */
+        .table-wrap {
+            overflow-x: auto;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: .9rem;
+        }
+
+        th,
+        td {
+            text-align: left;
+            padding: 12px 14px;
+            border-bottom: 1px solid var(--border);
+            vertical-align: top;
+        }
+
+        th {
+            font-family: var(--font-mono);
+            font-size: .72rem;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+            color: var(--ink-soft);
+            background: var(--bg-soft);
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        .num {
+            font-family: var(--font-mono);
+        }
+
+        /* ===== Empty state ===== */
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            color: var(--ink-soft);
+        }
+
+        .empty-state h4 {
+            color: var(--ink-soft);
+        }
+
+        /* ===== Modal ===== */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(42, 33, 24, .45);
+            display: none;
+            align-items: flex-start;
+            justify-content: center;
+            z-index: 100;
+            padding: 40px 16px;
+            overflow-y: auto;
+        }
+
+        .modal-overlay.open {
+            display: flex;
+        }
+
+        .modal {
+            background: var(--surface);
+            border-radius: var(--radius);
+            max-width: 520px;
+            width: 100%;
+            padding: 26px;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            background: var(--bg-soft);
+            border: none;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: var(--ink-soft);
+        }
+
+        /* ===== Toast ===== */
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            background: var(--ink);
+            color: #fff;
+            padding: 12px 18px;
+            border-radius: var(--radius-sm);
+            font-size: .88rem;
+            box-shadow: var(--shadow-lg);
+            max-width: 320px;
+        }
+
+        .toast.success {
+            background: var(--primary-dark);
+        }
+
+        .toast.error {
+            background: var(--danger);
+        }
+
+        /* ===== Water gauge ===== */
+        .gauge-wrap {
+            width: 160px;
+            margin: 0 auto;
+        }
+
+        .gauge-track {
+            background: var(--water-light);
+            border-radius: 999px;
+            height: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        .gauge-fill {
+            background: var(--water);
+            height: 100%;
+            border-radius: 999px;
+        }
+
+        /* ===== Loading ===== */
+        .loading {
+            text-align: center;
+            padding: 60px 0;
+            color: var(--ink-soft);
+            font-family: var(--font-mono);
+            font-size: .85rem;
+        }
+
+        /* ===== Footer ===== */
+        .site-footer {
+            background: var(--primary-dark);
+            color: #EFEADA;
+            margin-top: 60px;
+            padding: 40px 0 24px;
+        }
+
+        .footer-inner {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 24px;
+            margin-bottom: 20px;
+        }
+
+        .site-footer h4 {
+            color: #fff;
+        }
+
+        .site-footer a {
+            color: #D9CFB4;
+            text-decoration: none;
+            font-size: .88rem;
+        }
+
+        .site-footer .fine {
+            font-family: var(--font-mono);
+            font-size: .72rem;
+            color: #B7AC8F;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, .12);
+            padding-top: 16px;
+        }
+
+        .section-title-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .user-chip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary-light);
+            padding: 6px 8px 6px 14px;
+            border-radius: 999px;
+            font-size: .85rem;
+            font-weight: 600;
+            color: var(--primary-dark);
+        }
+
+        @media (max-width:920px) {
+            .nav {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--surface);
+                flex-direction: column;
+                align-items: stretch;
+                padding: 10px;
+                border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-lg);
+                display: none;
+            }
+
+            .nav.nav-open {
+                display: flex;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .grid-4 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid-3 {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+
+            .stat-row {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width:600px) {
+
+            .grid-4,
+            .grid-3 {
+                grid-template-columns: 1fr;
+            }
+
+            h1 {
+                font-size: 1.7rem;
+            }
+
+            .header-inner {
+                padding: 12px 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="site-header">
+        <div class="header-inner">
+            <a class="brand" onclick="navigate('home')">
+                <span class="brand-mark" aria-hidden="true">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M12 3L3 10h2v10h5v-6h4v6h5V10h2L12 3z" fill="#FBF7EC" />
+                    </svg>
+                </span>
+                <span class="brand-text"><b>स्मार्ट व्हिलेज पोर्टल</b><span>Village Digital Services</span></span>
+            </a>
+            <button class="hamburger" onclick="toggleMobileMenu()" aria-label="मेनू उघडा"><span></span></button>
+            <ul class="nav" id="navList">
+                <li class="nav-link" data-view="home" onclick="navigate('home')">मुख्यपृष्ठ</li>
+                <li class="nav-link" data-view="schemes" onclick="navigate('schemes')">योजना</li>
+                <li class="nav-link" data-view="farmer" onclick="navigate('farmer')">शेतकरी माहिती</li>
+                <li class="nav-link" data-view="complaints" onclick="navigate('complaints')">तक्रार</li>
+                <li class="nav-link" data-view="water" onclick="navigate('water')">पाणीपुरवठा</li>
+                <li class="nav-link" data-view="news" onclick="navigate('news')">बातम्या</li>
+                <li class="nav-link" data-view="emergency" onclick="navigate('emergency')">आपत्कालीन संपर्क</li>
+                <li class="nav-link" data-view="admin" onclick="navigate('admin')">प्रशासन</li>
+            </ul>
+            <div class="header-actions" id="headerActions"></div>
+        </div>
+    </header>
+
+    <main id="app" class="container"></main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div id="footerWarli"></div>
+            <div class="footer-inner">
+                <div>
+                    <h4>स्मार्ट व्हिलेज पोर्टल</h4>
+                    <p style="color:#D9CFB4; font-size:.88rem; max-width:280px;">गावातील नागरिक, शेतकरी आणि ग्रामपंचायत
+                        यांच्यासाठी एकाच ठिकाणी सर्व माहिती व सेवा.</p>
+                </div>
+                <div>
+                    <h4>त्वरित दुवे</h4>
+                    <p><a onclick="navigate('schemes')">सरकारी योजना</a></p>
+                    <p><a onclick="navigate('complaints')">तक्रार नोंदवा</a></p>
+                    <p><a onclick="navigate('emergency')">आपत्कालीन संपर्क</a></p>
+                </div>
+                <div>
+                    <h4>प्रशासन</h4>
+                    <p><a onclick="navigate('admin')">ॲडमिन लॉगिन</a></p>
+                    <p><a onclick="navigate('register')">नागरिक नोंदणी</a></p>
+                </div>
+            </div>
+            <div class="fine">© <span id="yearNow"></span> ग्रामपंचायत डिजिटल सेवा · हे प्रोटोटाइप संकेतस्थळ आहे</div>
+        </div>
+    </footer>
+
+    <div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this) closeModal()">
+        <div class="modal" id="modalBox">
+            <button class="modal-close" onclick="closeModal()" aria-label="बंद करा">✕</button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script>
+        /* ============================= STATE ============================= */
+        let currentUser = null;
+        let isAdmin = false;
+        let adminTab = 'schemes';
+        let complaintsTab = 'submit';
+        let cache = { schemes: [], crops: [], news: [], complaints: [], users: [], emergency: [], water: null, settings: null };
+        let pendingPhoto = null;
+
+        /* ============================= API HELPERS (PHP backend) ============================= */
+        const API_BASE = 'api/';
+        async function apiSend(method, endpoint, body, params) {
+            const qs = params ? ('?' + new URLSearchParams(params).toString()) : '';
+            try {
+                const opts = { method, credentials: 'same-origin' };
+                if (body !== undefined) {
+                    opts.headers = { 'Content-Type': 'application/json' };
+                    opts.body = JSON.stringify(body);
+                }
+                const res = await fetch(API_BASE + endpoint + qs, opts);
+                const data = await res.json().catch(() => ({}));
+                if (!res.ok) return { error: data.error || 'त्रुटी आली', status: res.status };
+                return data;
+            } catch (e) { return { error: 'सर्व्हरशी संपर्क होऊ शकला नाही' }; }
+        }
+        const apiGet = (endpoint, params) => apiSend('GET', endpoint, undefined, params);
+        const apiPost = (endpoint, body, params) => apiSend('POST', endpoint, body || {}, params);
+        const apiPut = (endpoint, body, params) => apiSend('PUT', endpoint, body || {}, params);
+        const apiDelete = (endpoint, params) => apiSend('DELETE', endpoint, undefined, params);
+
+        /* ============================= UTIL ============================= */
+        function $(sel) { return document.querySelector(sel); }
+        function escapeHtml(str) {
+            if (str === undefined || str === null) return '';
+            return String(str).replace(/[&<>"']/g, m => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m]));
+        }
+        function formatDate(iso) {
+            if (!iso) return '—';
+            try { return new Date(iso).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }); }
+            catch (e) { return iso; }
+        }
+        function formatDateTime(iso) {
+            if (!iso) return '—';
+            try { return new Date(iso).toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) + ', ' + new Date(iso).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' }); }
+            catch (e) { return iso; }
+        }
+        function toast(msg, type = 'success') {
+            const c = $('#toastContainer');
+            const el = document.createElement('div');
+            el.className = 'toast ' + type;
+            el.textContent = msg;
+            c.appendChild(el);
+            setTimeout(() => { el.style.opacity = '0'; el.style.transition = 'opacity .3s'; setTimeout(() => el.remove(), 300); }, 3200);
+        }
+        function openModal(html) {
+            $('#modalContent').innerHTML = html;
+            $('#modalOverlay').classList.add('open');
+        }
+        function closeModal() { $('#modalOverlay').classList.remove('open'); $('#modalContent').innerHTML = ''; }
+        function toggleMobileMenu() { $('#navList').classList.toggle('nav-open'); }
+        function closeMobileMenu() { $('#navList').classList.remove('nav-open'); }
+        function loadingHtml(label) { return '<div class="loading">' + escapeHtml(label || 'लोड होत आहे…') + '</div>'; }
+        function icon(svgInner, size = 22) { return '<svg width="' + size + '" height="' + size + '" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">' + svgInner + '</svg>'; }
+
+        /* icon set (simple line icons) */
+        const ICONS = {
+            scheme: '<rect x="4" y="3" width="16" height="18" rx="2" stroke="currentColor" stroke-width="1.6"/><line x1="7.5" y1="8" x2="16.5" y2="8" stroke="currentColor" stroke-width="1.6"/><line x1="7.5" y1="12" x2="16.5" y2="12" stroke="currentColor" stroke-width="1.6"/><line x1="7.5" y1="16" x2="13" y2="16" stroke="currentColor" stroke-width="1.6"/>',
+            farmer: '<path d="M12 3v6" stroke="currentColor" stroke-width="1.6"/><path d="M12 9c-3 0-5-2-5-5 3 0 5 2 5 5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 9c3 0 5-2 5-5-3 0-5 2-5 5z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M6 21c0-5 3-9 6-9s6 4 6 9" stroke="currentColor" stroke-width="1.6"/>',
+            complaint: '<path d="M12 4a8 8 0 0 0-6.9 12l-1 4 4.1-1A8 8 0 1 0 12 4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><line x1="12" y1="9" x2="12" y2="13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="16" r="1" fill="currentColor"/>',
+            water: '<path d="M12 3s6 7 6 11.5A6 6 0 1 1 6 14.5C6 10 12 3 12 3z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
+            news: '<rect x="3.5" y="5" width="14" height="15" rx="1.5" stroke="currentColor" stroke-width="1.6"/><path d="M17.5 8.5H20a.5.5 0 0 1 .5.5v9a2 2 0 0 1-2 2" stroke="currentColor" stroke-width="1.6"/><line x1="6.5" y1="9" x2="14.5" y2="9" stroke="currentColor" stroke-width="1.6"/><line x1="6.5" y1="12" x2="14.5" y2="12" stroke="currentColor" stroke-width="1.6"/><line x1="6.5" y1="15" x2="11" y2="15" stroke="currentColor" stroke-width="1.6"/>',
+            phone: '<path d="M5 4h3l1.5 4-2 1.5a13 13 0 0 0 6 6l1.5-2 4 1.5v3a1.5 1.5 0 0 1-1.6 1.5A16 16 0 0 1 3.5 5.6 1.5 1.5 0 0 1 5 4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>',
+            user: '<circle cx="12" cy="8" r="3.4" stroke="currentColor" stroke-width="1.6"/><path d="M5 20c0-3.6 3.1-6.2 7-6.2s7 2.6 7 6.2" stroke="currentColor" stroke-width="1.6"/>',
+            lock: '<rect x="5" y="10.5" width="14" height="9" rx="1.6" stroke="currentColor" stroke-width="1.6"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5" stroke="currentColor" stroke-width="1.6"/>',
+            drop: '<path d="M12 3s5.5 6.3 5.5 10a5.5 5.5 0 1 1-11 0C6.5 9.3 12 3 12 3z" stroke="currentColor" stroke-width="1.6"/>',
+        };
+
+        /* ============================= WARLI STRIP ============================= */
+        const warliStripSVG = (footer) => `
+<svg class="warli-strip ${footer ? 'footer-strip' : ''}" viewBox="0 0 1300 90" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+<defs>
+<symbol id="w-sun" viewBox="0 0 60 60"><circle cx="30" cy="30" r="8" fill="currentColor"/>
+<line x1="41" y1="30" x2="47" y2="30" stroke="currentColor" stroke-width="2"/>
+<line x1="37.8" y1="37.8" x2="42" y2="42" stroke="currentColor" stroke-width="2"/>
+<line x1="30" y1="41" x2="30" y2="47" stroke="currentColor" stroke-width="2"/>
+<line x1="22.2" y1="37.8" x2="18" y2="42" stroke="currentColor" stroke-width="2"/>
+<line x1="19" y1="30" x2="13" y2="30" stroke="currentColor" stroke-width="2"/>
+<line x1="22.2" y1="22.2" x2="18" y2="18" stroke="currentColor" stroke-width="2"/>
+<line x1="30" y1="19" x2="30" y2="13" stroke="currentColor" stroke-width="2"/>
+<line x1="37.8" y1="22.2" x2="42" y2="18" stroke="currentColor" stroke-width="2"/></symbol>
+<symbol id="w-tree" viewBox="0 0 60 70"><rect x="27" y="46" width="6" height="20" fill="currentColor"/><polygon points="30,4 10,32 50,32" fill="currentColor"/><polygon points="30,16 14,44 46,44" fill="currentColor"/></symbol>
+<symbol id="w-hut" viewBox="0 0 70 60"><polygon points="5,30 35,4 65,30" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><rect x="15" y="30" width="40" height="24" fill="none" stroke="currentColor" stroke-width="3"/><rect x="30" y="40" width="10" height="14" fill="currentColor"/></symbol>
+<symbol id="w-person" viewBox="0 0 40 70"><circle cx="20" cy="9" r="6" fill="currentColor"/><line x1="20" y1="15" x2="20" y2="40" stroke="currentColor" stroke-width="3"/><line x1="20" y1="21" x2="8" y2="31" stroke="currentColor" stroke-width="3"/><line x1="20" y1="21" x2="32" y2="31" stroke="currentColor" stroke-width="3"/><line x1="20" y1="40" x2="10" y2="60" stroke="currentColor" stroke-width="3"/><line x1="20" y1="40" x2="30" y2="60" stroke="currentColor" stroke-width="3"/></symbol>
+<symbol id="w-animal" viewBox="0 0 70 40"><ellipse cx="38" cy="20" rx="20" ry="9" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="12" cy="14" r="5" fill="currentColor"/><line x1="9" y1="10" x2="6" y2="5" stroke="currentColor" stroke-width="2"/><line x1="14" y1="10" x2="16" y2="5" stroke="currentColor" stroke-width="2"/><line x1="24" y1="28" x2="22" y2="37" stroke="currentColor" stroke-width="3"/><line x1="34" y1="29" x2="33" y2="37" stroke="currentColor" stroke-width="3"/><line x1="44" y1="29" x2="45" y2="37" stroke="currentColor" stroke-width="3"/><line x1="52" y1="27" x2="55" y2="36" stroke="currentColor" stroke-width="3"/></symbol>
+</defs>
+<use href="#w-sun" x="0" y="14" width="55" height="55"/>
+<use href="#w-tree" x="80" y="12" width="52" height="60"/>
+<use href="#w-hut" x="165" y="18" width="60" height="52"/>
+<use href="#w-person" x="255" y="14" width="34" height="60"/>
+<use href="#w-tree" x="320" y="10" width="52" height="60"/>
+<use href="#w-animal" x="405" y="42" width="62" height="36"/>
+<use href="#w-person" x="500" y="14" width="34" height="60"/>
+<use href="#w-hut" x="565" y="18" width="60" height="52"/>
+<use href="#w-tree" x="655" y="12" width="52" height="60"/>
+<use href="#w-sun" x="735" y="14" width="55" height="55"/>
+<use href="#w-person" x="820" y="14" width="34" height="60"/>
+<use href="#w-animal" x="885" y="42" width="62" height="36"/>
+<use href="#w-tree" x="975" y="10" width="52" height="60"/>
+<use href="#w-hut" x="1055" y="18" width="60" height="52"/>
+<use href="#w-person" x="1145" y="14" width="34" height="60"/>
+<use href="#w-tree" x="1210" y="12" width="52" height="60"/>
+</svg>`;
+
+        /* ============================= HERO VILLAGE ILLUSTRATION ============================= */
+        const heroVillageSVG = () => `
+<svg viewBox="0 0 1440 620" preserveAspectRatio="xMidYMax slice" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="गावाचे वारली शैलीतील दृश्य">
+<defs>
+  <linearGradient id="heroSky" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#FDF9EF"/>
+    <stop offset="55%" stop-color="#F6EAD2"/>
+    <stop offset="100%" stop-color="#EAD8AE"/>
+  </linearGradient>
+  <linearGradient id="heroHillFar" x1="0" y1="0" x2="0" y2="1">
+    <stop offset="0%" stop-color="#CBDAC2"/>
+    <stop offset="100%" stop-color="#AFC5A2"/>
+  </linearGradient>
+  <symbol id="hv-tree" viewBox="0 0 60 70"><rect x="27" y="46" width="6" height="20" fill="currentColor"/><polygon points="30,4 10,32 50,32" fill="currentColor"/><polygon points="30,16 14,44 46,44" fill="currentColor"/></symbol>
+  <symbol id="hv-hut" viewBox="0 0 70 60"><polygon points="5,30 35,4 65,30" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><rect x="15" y="30" width="40" height="24" fill="none" stroke="currentColor" stroke-width="3"/><rect x="30" y="40" width="10" height="14" fill="currentColor"/></symbol>
+  <symbol id="hv-person" viewBox="0 0 40 70"><circle cx="20" cy="9" r="6" fill="currentColor"/><line x1="20" y1="15" x2="20" y2="40" stroke="currentColor" stroke-width="3"/><line x1="20" y1="21" x2="8" y2="31" stroke="currentColor" stroke-width="3"/><line x1="20" y1="21" x2="32" y2="31" stroke="currentColor" stroke-width="3"/><line x1="20" y1="40" x2="10" y2="60" stroke="currentColor" stroke-width="3"/><line x1="20" y1="40" x2="30" y2="60" stroke="currentColor" stroke-width="3"/></symbol>
+  <symbol id="hv-animal" viewBox="0 0 70 40"><ellipse cx="38" cy="20" rx="20" ry="9" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="12" cy="14" r="5" fill="currentColor"/><line x1="9" y1="10" x2="6" y2="5" stroke="currentColor" stroke-width="2"/><line x1="14" y1="10" x2="16" y2="5" stroke="currentColor" stroke-width="2"/><line x1="24" y1="28" x2="22" y2="37" stroke="currentColor" stroke-width="3"/><line x1="34" y1="29" x2="33" y2="37" stroke="currentColor" stroke-width="3"/><line x1="44" y1="29" x2="45" y2="37" stroke="currentColor" stroke-width="3"/><line x1="52" y1="27" x2="55" y2="36" stroke="currentColor" stroke-width="3"/></symbol>
+</defs>
+ 
+<rect x="0" y="0" width="1440" height="620" fill="url(#heroSky)"/>
+ 
+<!-- sun -->
+<g transform="translate(1120,105)" opacity="0.85">
+  <circle r="34" fill="#C6892E"/>
+  <g stroke="#C6892E" stroke-width="4" stroke-linecap="round">
+    <line x1="0" y1="-52" x2="0" y2="-68"/><line x1="0" y1="52" x2="0" y2="68"/>
+    <line x1="-52" y1="0" x2="-68" y2="0"/><line x1="52" y1="0" x2="68" y2="0"/>
+    <line x1="-37" y1="-37" x2="-48" y2="-48"/><line x1="37" y1="-37" x2="48" y2="-48"/>
+    <line x1="-37" y1="37" x2="-48" y2="48"/><line x1="37" y1="37" x2="48" y2="48"/>
+  </g>
+</g>
+ 
+<!-- birds -->
+<g stroke="#6B5D4B" stroke-width="2.4" fill="none" stroke-linecap="round" opacity="0.5">
+  <path d="M140,80 q10,-14 20,0 q10,-14 20,0"/>
+  <path d="M760,60 q8,-11 16,0 q8,-11 16,0"/>
+  <path d="M330,140 q7,-10 14,0 q7,-10 14,0"/>
+</g>
+ 
+<!-- far hills -->
+<path d="M0,420 C180,360 340,382 480,408 C640,440 760,392 900,412 C1080,438 1220,398 1440,428 L1440,620 L0,620 Z" fill="url(#heroHillFar)" opacity="0.55"/>
+<!-- mid hills -->
+<path d="M0,470 C200,432 360,460 520,446 C700,430 860,470 1020,452 C1180,434 1320,460 1440,448 L1440,620 L0,620 Z" fill="#8CA87E" opacity="0.4"/>
+ 
+<!-- terraced field contours -->
+<g fill="none" stroke-linecap="round">
+  <path d="M0,508 Q360,492 720,508 T1440,502" stroke="#C6892E" stroke-width="2" opacity="0.28"/>
+  <path d="M0,530 Q360,516 720,530 T1440,524" stroke="#A2492A" stroke-width="2" opacity="0.22"/>
+  <path d="M0,552 Q360,538 720,552 T1440,546" stroke="#C6892E" stroke-width="2" opacity="0.25"/>
+</g>
+ 
+<!-- village cluster along the baseline -->
+<g style="color:#4A3826" opacity="0.82">
+  <use href="#hv-tree" x="40" y="500" width="46" height="55"/>
+  <use href="#hv-hut" x="110" y="505" width="60" height="52"/>
+  <use href="#hv-person" x="185" y="502" width="28" height="56"/>
+  <use href="#hv-animal" x="235" y="522" width="52" height="32"/>
+  <use href="#hv-tree" x="310" y="495" width="42" height="52"/>
+  <use href="#hv-hut" x="400" y="500" width="66" height="56"/>
+  <use href="#hv-person" x="490" y="500" width="26" height="56"/>
+  <use href="#hv-tree" x="545" y="498" width="44" height="54"/>
+  <use href="#hv-animal" x="615" y="524" width="50" height="30"/>
+  <use href="#hv-hut" x="695" y="503" width="58" height="50"/>
+  <use href="#hv-person" x="775" y="500" width="26" height="56"/>
+  <use href="#hv-tree" x="825" y="494" width="46" height="55"/>
+  <use href="#hv-hut" x="905" y="502" width="62" height="54"/>
+  <use href="#hv-animal" x="990" y="523" width="52" height="31"/>
+  <use href="#hv-tree" x="1060" y="497" width="42" height="52"/>
+  <use href="#hv-person" x="1130" y="501" width="27" height="56"/>
+  <use href="#hv-hut" x="1195" y="499" width="64" height="56"/>
+  <use href="#hv-tree" x="1290" y="495" width="46" height="55"/>
+  <use href="#hv-person" x="1360" y="502" width="26" height="55"/>
+</g>
+</svg>`;
+
+        /* ============================= SESSION ============================= */
+        async function loadSession() {
+            const data = await apiGet('session.php');
+            if (data && !data.error) {
+                currentUser = data.user || null;
+                isAdmin = !!data.isAdmin;
+            }
+        }
+
+        async function registerUser(event) {
+            event.preventDefault();
+            const f = event.target;
+            const phone = f.phone.value.trim();
+            const name = f.fullName.value.trim();
+            const address = f.address.value.trim();
+            const pass = f.password.value;
+            if (!/^[6-9]\d{9}$/.test(phone)) { toast('कृपया वैध १० अंकी मोबाईल नंबर टाका', 'error'); return; }
+            if (pass.length < 4) { toast('पासवर्ड किमान ४ अक्षरी असावा', 'error'); return; }
+            const res = await apiPost('register.php', { phone, fullName: name, address, password: pass });
+            if (res.error) { toast(res.error, 'error'); return; }
+            currentUser = res.user;
+            toast('नोंदणी यशस्वी! स्वागत आहे, ' + name, 'success');
+            navigate('home');
+        }
+
+        async function loginUser(event) {
+            event.preventDefault();
+            const f = event.target;
+            const phone = f.phone.value.trim();
+            const pass = f.password.value;
+            const res = await apiPost('login.php', { phone, password: pass });
+            if (res.error) { toast(res.error, 'error'); return; }
+            currentUser = res.user;
+            toast('स्वागत आहे, ' + res.user.fullName, 'success');
+            navigate('home');
+        }
+
+        async function logoutUser() {
+            await apiPost('logout.php');
+            currentUser = null;
+            toast('लॉगआऊट झाले', 'success');
+            navigate('home');
+        }
+
+        async function adminLoginSubmit(event) {
+            event.preventDefault();
+            const f = event.target;
+            const res = await apiPost('admin_login.php', { username: f.username.value.trim(), password: f.password.value });
+            if (res.error) { toast(res.error, 'error'); return; }
+            isAdmin = true;
+            toast('ॲडमिन लॉगिन यशस्वी', 'success');
+            adminTab = 'schemes';
+            navigate('admin');
+        }
+
+        async function adminLogout() {
+            await apiPost('admin_logout.php');
+            isAdmin = false;
+            toast('ॲडमिन लॉगआऊट झाले', 'success');
+            navigate('home');
+        }
+
+        /* ============================= ROUTER ============================= */
+        function navigate(view, param) {
+            location.hash = view + (param ? ('/' + param) : '');
+        }
+        window.addEventListener('hashchange', route);
+        function route() {
+            const hash = location.hash.slice(1) || 'home';
+            const parts = hash.split('/');
+            const view = parts[0] || 'home';
+            const param = parts.slice(1).join('/');
+            renderHeaderActions();
+            updateActiveNav(view);
+            closeMobileMenu();
+            window.scrollTo(0, 0);
+            renderView(view, param);
+        }
+        function updateActiveNav(view) {
+            document.querySelectorAll('.nav-link').forEach(el => {
+                el.classList.toggle('active', el.dataset.view === view);
+            });
+        }
+        function renderHeaderActions() {
+            const el = $('#headerActions');
+            if (isAdmin) {
+                el.innerHTML = '<span class="user-chip">' + icon(ICONS.lock, 15) + ' ॲडमिन <button class="btn btn-ghost btn-sm" onclick="adminLogout()">लॉगआऊट</button></span>';
+            } else if (currentUser) {
+                el.innerHTML = '<span class="user-chip">' + icon(ICONS.user, 15) + ' ' + escapeHtml(currentUser.fullName.split(' ')[0]) + ' <button class="btn btn-ghost btn-sm" onclick="logoutUser()">लॉगआऊट</button></span>';
+            } else {
+                el.innerHTML = '<button class="btn btn-ghost btn-sm" onclick="navigate(\'login\')">लॉगिन</button><button class="btn btn-primary btn-sm" onclick="navigate(\'register\')">नोंदणी</button>';
+            }
+        }
+
+        async function renderView(view, param) {
+            const app = $('#app');
+            app.innerHTML = loadingHtml();
+            try {
+                switch (view) {
+                    case 'home': await renderHome(); break;
+                    case 'schemes': param ? await renderSchemeDetail(param) : await renderSchemes(); break;
+                    case 'farmer': await renderFarmer(); break;
+                    case 'complaints': await renderComplaints(); break;
+                    case 'water': await renderWater(); break;
+                    case 'news': await renderNews(); break;
+                    case 'emergency': await renderEmergency(); break;
+                    case 'login': renderLogin(); break;
+                    case 'register': renderRegister(); break;
+                    case 'admin': await renderAdmin(); break;
+                    default: await renderHome();
+                }
+            } catch (e) {
+                console.error(e);
+                app.innerHTML = '<div class="empty-state"><h4>काहीतरी चूक झाली</h4><p>कृपया पुन्हा प्रयत्न करा.</p></div>';
+            }
+        }
+
+        /* ============================= HOME ============================= */
+        async function renderHome() {
+            const [schemesRes, statsRes, newsRes] = await Promise.all([
+                apiGet('schemes.php'), apiGet('complaints.php', { stats: 1 }), apiGet('news.php')
+            ]);
+            const schemes = Array.isArray(schemesRes) ? schemesRes : [];
+            const news = Array.isArray(newsRes) ? newsRes : [];
+            const stats = (statsRes && !statsRes.error) ? statsRes : { total: 0, resolved: 0 };
+            cache.schemes = schemes; cache.news = news;
+            const modules = [
+                { v: 'schemes', ic: ICONS.scheme, bg: 'var(--primary-light)', col: 'var(--primary)', t: 'सरकारी योजना', d: 'योजना, पात्रता व अर्जाची माहिती' },
+                { v: 'farmer', ic: ICONS.farmer, bg: 'var(--gold-light)', col: 'var(--gold-dark)', t: 'शेतकरी माहिती', d: 'पीक, हवामान, बाजारभाव व टिप्स' },
+                { v: 'complaints', ic: ICONS.complaint, bg: 'var(--clay-light)', col: 'var(--clay)', t: 'तक्रार नोंदवा', d: 'समस्या नोंदवा व स्थिती तपासा' },
+                { v: 'water', ic: ICONS.water, bg: 'var(--water-light)', col: 'var(--water)', t: 'पाणीपुरवठा', d: 'आजची वेळ व टाकीची पातळी' },
+                { v: 'news', ic: ICONS.news, bg: 'var(--primary-light)', col: 'var(--primary)', t: 'गाव बातम्या', d: 'ग्रामसभा, सण व शालेय अपडेट' },
+                { v: 'emergency', ic: ICONS.phone, bg: 'var(--danger-light)', col: 'var(--danger)', t: 'आपत्कालीन संपर्क', d: 'महत्त्वाचे संपर्क क्रमांक' },
+            ];
+            const app = $('#app');
+            app.innerHTML = `
+  <section class="hero">
+    <div class="hero-bg" aria-hidden="true">${heroVillageSVG()}</div>
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="hero-content">
+      <span class="eyebrow">डिजिटल ग्रामसेवा</span>
+      <h1>तुमचं गाव, तुमची माहिती — एका क्लिकवर</h1>
+      <p class="lead">सरकारी योजना, शेतकरी माहिती, तक्रार नोंदणी, पाणीपुरवठा स्थिती व गावातील बातम्या — सर्व काही एकाच पोर्टलवर.</p>
+      <div style="display:flex; gap:10px; justify-content:center; flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="navigate('complaints')">तक्रार नोंदवा</button>
+        <button class="btn btn-outline" onclick="navigate('schemes')">योजना पहा</button>
+      </div>
+    </div>
+  </section>
+  <section class="stat-row">
+    <div class="stat-card"><b>${schemes.length}</b><span>सक्रिय योजना</span></div>
+    <div class="stat-card"><b>${stats.total}</b><span>नोंदवलेल्या तक्रारी</span></div>
+    <div class="stat-card"><b>${stats.resolved}</b><span>निकाली तक्रारी</span></div>
+    <div class="stat-card"><b>${news.length}</b><span>ताज्या बातम्या</span></div>
+  </section>
+  <section class="section" style="padding-top:0;">
+    <div class="section-head"><span class="eyebrow">सेवा</span><h2>सर्व सेवा एकाच ठिकाणी</h2></div>
+    <div class="grid grid-3">
+      ${modules.map(m => `
+        <div class="module-card" onclick="navigate('${m.v}')">
+          <span class="module-icon" style="background:${m.bg}; color:${m.col};">${icon(m.ic, 24)}</span>
+          <h3>${m.t}</h3><p>${m.d}</p>
+        </div>`).join('')}
+    </div>
+  </section>
+  ${news.length ? `
+  <section class="section" style="padding-top:0;">
+    <div class="section-title-row"><h2 style="margin:0;">ताज्या बातम्या</h2><a class="btn btn-ghost btn-sm" onclick="navigate('news')">सर्व पहा</a></div>
+    ${news.slice(0, 3).map(n => `
+      <div class="notice-item"><div class="pin-dot"></div><div class="notice-body">
+        <div class="notice-title">${escapeHtml(n.title)}</div>
+        <div class="notice-meta">${escapeHtml(n.category)} · ${formatDate(n.date)}</div>
+      </div></div>`).join('')}
+  </section>` : ''}`;
+        }
+
+        /* ============================= SCHEMES ============================= */
+        async function renderSchemes() {
+            const res = await apiGet('schemes.php');
+            const schemes = Array.isArray(res) ? res : [];
+            cache.schemes = schemes;
+            const app = $('#app');
+            app.innerHTML = `
+  <section class="section">
+    <div class="section-head"><span class="eyebrow">Government Schemes</span><h2>सरकारी योजना</h2><p style="color:var(--ink-soft)">पात्रता, आवश्यक कागदपत्रे व अर्ज कसा करायचा याची माहिती.</p></div>
+    ${schemes.length === 0 ? `<div class="empty-state"><h4>सध्या कोणतीही योजना उपलब्ध नाही</h4><p>ॲडमिन लवकरच माहिती जोडतील.</p></div>` : `
+    <div class="grid grid-2">
+      ${schemes.map(s => `
+        <div class="card" style="cursor:pointer;" onclick="navigate('schemes','${s.id}')">
+          <h3>${escapeHtml(s.name)}</h3>
+          <p style="color:var(--ink-soft); font-size:.9rem;">${escapeHtml(s.description).slice(0, 110)}${s.description.length > 110 ? '…' : ''}</p>
+          <span class="badge badge-progress">अंतिम तारीख: ${escapeHtml(s.lastDate || '—')}</span>
+        </div>`).join('')}
+    </div>`}
+  </section>`;
+        }
+        async function renderSchemeDetail(id) {
+            let s = cache.schemes.find(x => x.id === id);
+            if (!s) { const res = await apiGet('schemes.php', { id }); s = (res && !res.error) ? res : null; }
+            const app = $('#app');
+            if (!s) { app.innerHTML = '<div class="empty-state"><h4>योजना सापडली नाही</h4></div>'; return; }
+            app.innerHTML = `
+  <section class="section">
+    <button class="btn btn-ghost btn-sm" onclick="navigate('schemes')">← सर्व योजना</button>
+    <div class="card" style="margin-top:16px;">
+      <h2>${escapeHtml(s.name)}</h2>
+      <p>${escapeHtml(s.description)}</p>
+      <div class="grid grid-2" style="margin-top:18px;">
+        <div><h4>पात्रता</h4><p style="color:var(--ink-soft)">${escapeHtml(s.eligibility)}</p></div>
+        <div><h4>आवश्यक कागदपत्रे</h4><p style="color:var(--ink-soft)">${escapeHtml(s.documents)}</p></div>
+      </div>
+      <div style="margin-top:10px;"><h4>अंतिम तारीख</h4><p style="color:var(--ink-soft)">${escapeHtml(s.lastDate || '—')}</p></div>
+      ${s.applyLink ? `<a class="btn btn-primary" href="${escapeHtml(s.applyLink)}" target="_blank" rel="noopener">ऑनलाइन अर्ज करा ↗</a>` : ''}
+    </div>
+  </section>`;
+        }
+
+        /* ============================= FARMER INFO ============================= */
+        async function renderFarmer() {
+            const [cropsRes, settingsRes] = await Promise.all([apiGet('crops.php'), apiGet('village_settings.php')]);
+            const crops = Array.isArray(cropsRes) ? cropsRes : [];
+            const settings = (settingsRes && !settingsRes.error) ? settingsRes : { lat: 19.9975, lon: 73.7898, villageName: 'आपले गाव' };
+            cache.crops = crops; cache.settings = settings;
+            const app = $('#app');
+            app.innerHTML = `
+  <section class="section">
+    <div class="section-head"><span class="eyebrow">Farmer Information</span><h2>शेतकरी माहिती</h2></div>
+ 
+    <div class="card" style="margin-bottom:22px;">
+      <h3>${icon(ICONS.drop, 18)} आजचे हवामान — ${escapeHtml(settings.villageName)}</h3>
+      <div id="weatherBox" style="margin-top:8px;">${loadingHtml('हवामान माहिती मिळवत आहे…')}</div>
+    </div>
+ 
+    <h3>पीक माहिती व बाजारभाव</h3>
+    <p class="hint">दर्शविलेले दर नमुना/अंदाजे आहेत — प्रत्यक्ष दरासाठी कृषी उत्पन्न बाजार समितीशी संपर्क साधा.</p>
+    <div class="table-wrap" style="margin-bottom:26px;">
+      <table>
+        <thead><tr><th>पीक</th><th>हंगाम</th><th>अंदाजे दर</th><th>टिप्स</th></tr></thead>
+        <tbody>
+        ${crops.length === 0 ? '<tr><td colspan="4" style="text-align:center; color:var(--ink-soft);">माहिती उपलब्ध नाही</td></tr>' : crops.map(c => `
+          <tr><td><b>${escapeHtml(c.name)}</b></td><td>${escapeHtml(c.season)}</td><td class="num">${escapeHtml(c.price)}</td><td>${escapeHtml(c.tips)}</td></tr>
+        `).join('')}
+        </tbody>
+      </table>
+    </div>
+ 
+    <div class="grid grid-2">
+      <div class="card">
+        <h4>खत माहिती (सर्वसाधारण मार्गदर्शन)</h4>
+        <p style="color:var(--ink-soft); font-size:.92rem;">पेरणीपूर्वी माती परीक्षण करून घ्या. सेंद्रिय खतांचा (शेणखत/कंपोस्ट) वापर वाढवा व रासायनिक खतांचा संतुलित वापर स्थानिक कृषी सेवा केंद्र किंवा कृषी अधिकाऱ्यांच्या सल्ल्यानेच करा. अचूक मात्रेसाठी नेहमी तज्ज्ञांचा सल्ला घ्या.</p>
+      </div>
+      <div class="card">
+        <h4>शेती टिप्स</h4>
+        <p style="color:var(--ink-soft); font-size:.92rem;">पीक फेरपालट करा, ठिबक/तुषार सिंचनाने पाण्याची बचत करा, नियमित कीड-रोग सर्वेक्षण करा आणि हवामान अंदाजानुसार फवारणी व पेरणीचे नियोजन करा.</p>
+      </div>
+    </div>
+  </section>`;
+            fetchWeather(settings.lat, settings.lon);
+        }
+        function weatherCodeText(code) {
+            const map = { 0: 'स्वच्छ आकाश ☀️', 1: 'मुख्यतः स्वच्छ', 2: 'अंशतः ढगाळ', 3: 'ढगाळ आकाश', 45: 'धुके', 48: 'धुके', 51: 'हलकी रिमझिम', 53: 'रिमझिम पाऊस', 55: 'दाट रिमझिम', 61: 'हलका पाऊस', 63: 'मध्यम पाऊस', 65: 'मुसळधार पाऊस', 71: 'हलकी बर्फवृष्टी', 80: 'सरी', 81: 'मध्यम सरी', 82: 'जोरदार सरी', 95: 'वादळी पाऊस' };
+            return map[code] || 'हवामान माहिती';
+        }
+        async function fetchWeather(lat, lon) {
+            const box = $('#weatherBox');
+            if (!box) return;
+            try {
+                const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&timezone=Asia%2FKolkata`);
+                if (!res.ok) throw new Error('weather fetch failed');
+                const data = await res.json();
+                const cw = data.current_weather;
+                if (!cw) throw new Error('no data');
+                box.innerHTML = `<div style="display:flex; gap:22px; flex-wrap:wrap; align-items:center;">
+      <div><span style="font-family:var(--font-mono); font-size:2rem; color:var(--water);">${Math.round(cw.temperature)}°C</span></div>
+      <div><p style="margin:0; font-weight:600;">${weatherCodeText(cw.weathercode)}</p><p style="margin:0; color:var(--ink-soft); font-size:.85rem;">वाऱ्याचा वेग: ${cw.windspeed} किमी/तास</p></div>
+    </div>`;
+            } catch (e) {
+                box.innerHTML = '<p style="color:var(--ink-soft);">हवामान माहिती सध्या उपलब्ध नाही. कृपया नंतर पुन्हा प्रयत्न करा.</p>';
+            }
+        }
+
+        /* ============================= COMPLAINTS ============================= */
+        async function renderComplaints() {
+            const app = $('#app');
+            app.innerHTML = `
+  <section class="section">
+    <div class="section-head"><span class="eyebrow">Complaint System</span><h2>तक्रार नोंदणी व स्थिती</h2></div>
+    <div class="tabs">
+      <button class="tab-btn ${complaintsTab === 'submit' ? 'active' : ''}" onclick="setComplaintsTab('submit')">नवीन तक्रार नोंदवा</button>
+      <button class="tab-btn ${complaintsTab === 'track' ? 'active' : ''}" onclick="setComplaintsTab('track')">तक्रार स्थिती तपासा</button>
+    </div>
+    <div id="complaintsTabBody"></div>
+  </section>`;
+            renderComplaintsTabBody();
+        }
+        function setComplaintsTab(t) { complaintsTab = t; renderComplaints(); }
+        function renderComplaintsTabBody() {
+            const body = $('#complaintsTabBody');
+            pendingPhoto = null;
+            if (complaintsTab === 'submit') {
+                body.innerHTML = `
+    <div class="card" style="max-width:560px;">
+      <form onsubmit="submitComplaint(event)">
+        <div class="form-row">
+          <div class="form-group"><label>पूर्ण नाव *</label><input class="input" name="citizenName" required value="${currentUser ? escapeHtml(currentUser.fullName) : ''}"></div>
+          <div class="form-group"><label>मोबाईल नंबर *</label><input class="input" name="phone" required pattern="[6-9][0-9]{9}" maxlength="10" placeholder="10 अंकी मोबाईल नंबर" value="${currentUser ? escapeHtml(currentUser.phone) : ''}"></div>
+        </div>
+        <div class="form-group"><label>तक्रारीचा प्रकार *</label>
+          <select class="select" name="type" required>
+            <option value="">-- निवडा --</option>
+            <option>पाणी</option><option>वीज</option><option>रस्ते</option><option>कचरा</option><option>पथदिवे</option><option>इतर</option>
+          </select>
+        </div>
+        <div class="form-group"><label>तक्रारीचे वर्णन *</label><textarea class="textarea" name="description" required placeholder="समस्येचे सविस्तर वर्णन लिहा…"></textarea></div>
+        <div class="form-group"><label>फोटो अपलोड करा (ऐच्छिक)</label><input class="input file-input" type="file" accept="image/*" onchange="handlePhotoUpload(event)"><div class="hint" id="photoHint"></div></div>
+        <button class="btn btn-primary btn-block" type="submit">तक्रार सबमिट करा</button>
+      </form>
+    </div>`;
+            } else {
+                body.innerHTML = `
+    <div class="card" style="max-width:520px; margin-bottom:20px;">
+      <form onsubmit="trackComplaints(event)">
+        <div class="form-group"><label>मोबाईल नंबर टाका *</label><input class="input" name="phone" required pattern="[6-9][0-9]{9}" maxlength="10" placeholder="नोंदणी करताना दिलेला मोबाईल नंबर"></div>
+        <button class="btn btn-primary" type="submit">तक्रारी शोधा</button>
+      </form>
+    </div>
+    <div id="trackResults"></div>`;
+            }
+        }
+        function handlePhotoUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            const hint = $('#photoHint');
+            hint.textContent = 'फोटो प्रक्रिया करत आहे…';
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const img = new Image();
+                img.onload = function () {
+                    const maxW = 640;
+                    const scale = Math.min(1, maxW / img.width);
+                    const canvas = document.createElement('canvas');
+                    canvas.width = img.width * scale; canvas.height = img.height * scale;
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    pendingPhoto = canvas.toDataURL('image/jpeg', 0.6);
+                    hint.textContent = 'फोटो जोडला ✓';
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+        async function submitComplaint(event) {
+            event.preventDefault();
+            const f = event.target;
+            const payload = {
+                citizenName: f.citizenName.value.trim(),
+                phone: f.phone.value.trim(),
+                type: f.type.value,
+                description: f.description.value.trim(),
+                photo: pendingPhoto || null,
+            };
+            const res = await apiPost('complaints.php', payload);
+            if (res.error) { toast(res.error, 'error'); return; }
+            toast('तक्रार यशस्वीरित्या नोंदवली गेली. तक्रार क्रमांक: ' + res.id.slice(-6).toUpperCase(), 'success');
+            pendingPhoto = null;
+            renderComplaintsTabBody();
+            event.target.reset();
+        }
+        async function trackComplaints(event) {
+            event.preventDefault();
+            const phone = event.target.phone.value.trim();
+            const results = $('#trackResults');
+            results.innerHTML = loadingHtml('शोधत आहे…');
+            const res = await apiGet('complaints.php', { phone });
+            const mine = Array.isArray(res) ? res : [];
+            if (mine.length === 0) { results.innerHTML = '<div class="empty-state"><h4>या मोबाईल नंबरवर कोणतीही तक्रार आढळली नाही</h4></div>'; return; }
+            results.innerHTML = mine.map(c => `
+    <div class="notice-item ${c.status === 'निकाली' ? 'pin-success' : (c.status === 'प्रगतीपथावर' ? 'pin-water' : '')}">
+      <div class="pin-dot"></div>
+      <div class="notice-body">
+        <div class="notice-title">${escapeHtml(c.type)} — तक्रार क्र. ${c.id.slice(-6).toUpperCase()}</div>
+        <p style="margin:4px 0; font-size:.9rem;">${escapeHtml(c.description)}</p>
+        ${c.photo ? `<img src="${c.photo}" style="max-width:160px; border-radius:8px; margin:6px 0; display:block;">` : ''}
+        <span class="badge ${c.status === 'निकाली' ? 'badge-resolved' : (c.status === 'प्रगतीपथावर' ? 'badge-progress' : 'badge-pending')}">${escapeHtml(c.status)}</span>
+        ${c.adminReply ? `<p style="margin-top:8px; font-size:.85rem; color:var(--ink-soft);"><b>प्रशासनाचा प्रतिसाद:</b> ${escapeHtml(c.adminReply)}</p>` : ''}
+        <div class="notice-meta" style="margin-top:6px;">नोंदणी: ${formatDateTime(c.createdAt)}</div>
+      </div>
+    </div>`).join('');
+        }
+
+        /* ============================= WATER STATUS ============================= */
+        async function renderWater() {
+            const res = await apiGet('water.php');
+            const w = (res && !res.error) ? res : { timing: '—', tankLevel: 0, notice: '', alert: '' };
+            cache.water = w;
+            const app = $('#app');
+            app.innerHTML = `
+  <section class="section">
+    <div class="section-head"><span class="eyebrow">Water Supply Status</span><h2>पाणीपुरवठा स्थिती</h2></div>
+    ${w.alert ? `<div class="notice-item pin-danger"><div class="pin-dot"></div><div class="notice-body"><div class="notice-title">सूचना/इशारा</div><p style="margin:0;">${escapeHtml(w.alert)}</p></div></div>` : ''}
+    <div class="grid grid-2">
+      <div class="card">
+        <h4>${icon(ICONS.water, 18)} आजची पाणीपुरवठा वेळ</h4>
+        <p style="font-size:1.1rem; color:var(--water); font-weight:600;">${escapeHtml(w.timing)}</p>
+      </div>
+      <div class="card" style="text-align:center;">
+        <h4>टाकीची पाणी पातळी</h4>
+        <div class="gauge-wrap">
+          <div class="gauge-track"><div class="gauge-fill" style="width:${Math.max(0, Math.min(100, w.tankLevel))}%;"></div></div>
+          <p style="margin-top:8px; font-family:var(--font-mono); font-weight:600; color:var(--water);">${w.tankLevel}%</p>
+        </div>
+      </div>
+    </div>
+    <div class="card" style="margin-top:18px;">
+      <h4>देखभाल सूचना</h4>
+      <p style="color:var(--ink-soft);">${escapeHtml(w.notice || 'सध्या कोणतीही सूचना नाही.')}</p>
+      <div class="notice-meta">अद्ययावत: ${formatDateTime(w.updatedAt)}</div>
+    </div>
+  </section>`;
+        }
+
+        /* ============================= NEWS ============================= */
+        async function renderNews() {
+            const res = await apiGet('news.php');
+            const news = (Array.isArray(res) ? res : []).sort((a, b) => new Date(b.date) - new Date(a.date));
+            cache.news = news;
+            const app = $('#app');
+            app.innerHTML = `
+  <section class="section">
+    <div class="section-head"><span class="eyebrow">Village News</span><h2>गावातील बातम्या</h2></div>
+    ${news.length === 0 ? '<div class="empty-state"><h4>सध्या कोणतीही बातमी उपलब्ध नाही</h4></div>' : news.map(n => `
+      <div class="notice-item"><div class="pin-dot"></div><div class="notice-body">
+        <div class="notice-title">${escapeHtml(n.title)}</div>
+        <div class="notice-meta">${escapeHtml(n.category)} · ${formatDate(n.date)}</div>
+        <p style="margin:8px 0 0; font-size:.92rem;">${escapeHtml(n.content)}</p>
+      </div></div>`).join('')}
+  </section>`;
+        }
+
+        /* ============================= EMERGENCY ============================= */
+        async function renderEmergency() {
+            const res = await apiGet('emergency.php');
+            const contacts = Array.isArray(res) ? res : [];
+            cache.emergency = contacts;
+            const app = $('#app');
+            app.innerHTML = `
+  <section class="section">
+    <div class="section-head"><span class="eyebrow">Emergency Contacts</span><h2>आपत्कालीन संपर्क क्रमांक</h2></div>
+    <div class="grid grid-3">
+      ${contacts.map(c => `
+        <div class="card">
+          <h4>${icon(ICONS.phone, 16)} ${escapeHtml(c.name)}</h4>
+          <p style="font-family:var(--font-mono); font-size:1.3rem; color:var(--danger); margin:0;">${c.number ? escapeHtml(c.number) : 'लवकरच अद्ययावत होईल'}</p>
+        </div>`).join('')}
+    </div>
+  </section>`;
+        }
+
+        /* ============================= LOGIN / REGISTER ============================= */
+        function renderLogin() {
+            const app = $('#app');
+            app.innerHTML = `
+  <section class="section" style="max-width:420px; margin:0 auto;">
+    <h2 style="text-align:center;">नागरिक लॉगिन</h2>
+    <div class="card">
+      <form onsubmit="loginUser(event)">
+        <div class="form-group"><label>मोबाईल नंबर</label><input class="input" name="phone" required pattern="[6-9][0-9]{9}" maxlength="10"></div>
+        <div class="form-group"><label>पासवर्ड</label><input class="input" type="password" name="password" required></div>
+        <button class="btn btn-primary btn-block" type="submit">लॉगिन करा</button>
+      </form>
+      <p style="text-align:center; margin-top:14px; font-size:.88rem;">खाते नाही? <a onclick="navigate('register')" style="cursor:pointer;">नोंदणी करा</a></p>
+    </div>
+  </section>`;
+        }
+        function renderRegister() {
+            const app = $('#app');
+            app.innerHTML = `
+  <section class="section" style="max-width:460px; margin:0 auto;">
+    <h2 style="text-align:center;">नागरिक नोंदणी</h2>
+    <div class="card">
+      <form onsubmit="registerUser(event)">
+        <div class="form-group"><label>पूर्ण नाव</label><input class="input" name="fullName" required></div>
+        <div class="form-group"><label>मोबाईल नंबर</label><input class="input" name="phone" required pattern="[6-9][0-9]{9}" maxlength="10"></div>
+        <div class="form-group"><label>पत्ता</label><input class="input" name="address"></div>
+        <div class="form-group"><label>पासवर्ड</label><input class="input" type="password" name="password" required></div>
+        <button class="btn btn-primary btn-block" type="submit">नोंदणी करा</button>
+      </form>
+      <p style="text-align:center; margin-top:14px; font-size:.88rem;">आधीच खाते आहे? <a onclick="navigate('login')" style="cursor:pointer;">लॉगिन करा</a></p>
+    </div>
+  </section>`;
+        }
+
+        /* ============================= ADMIN ============================= */
+        async function renderAdmin() {
+            const app = $('#app');
+            if (!isAdmin) {
+                app.innerHTML = `
+    <section class="section" style="max-width:420px; margin:0 auto;">
+      <h2 style="text-align:center;">${icon(ICONS.lock, 20)} ॲडमिन लॉगिन</h2>
+      <div class="card">
+        <form onsubmit="adminLoginSubmit(event)">
+          <div class="form-group"><label>युजरनेम</label><input class="input" name="username" required></div>
+          <div class="form-group"><label>पासवर्ड</label><input class="input" type="password" name="password" required></div>
+          <button class="btn btn-primary btn-block" type="submit">लॉगिन करा</button>
+        </form>
+      </div>
+    </section>`;
+                return;
+            }
+            const tabs = [
+                ['schemes', 'योजना'], ['farmer', 'शेतकरी माहिती'], ['water', 'पाणीपुरवठा'],
+                ['news', 'बातम्या'], ['complaints', 'तक्रारी'], ['emergency', 'आपत्कालीन संपर्क'], ['users', 'नागरिक']
+            ];
+            app.innerHTML = `
+  <section class="section">
+    <div class="section-head"><span class="eyebrow">Admin Panel</span><h2>प्रशासन पॅनेल</h2></div>
+    <div class="tabs">
+      ${tabs.map(t => `<button class="tab-btn ${adminTab === t[0] ? 'active' : ''}" onclick="setAdminTab('${t[0]}')">${t[1]}</button>`).join('')}
+    </div>
+    <div id="adminTabBody">${loadingHtml()}</div>
+  </section>`;
+            renderAdminTabBody();
+        }
+        function setAdminTab(t) { adminTab = t; renderAdminTabBody(); }
+
+        async function renderAdminTabBody() {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            const body = $('#adminTabBody');
+            body.innerHTML = loadingHtml();
+            if (adminTab === 'schemes') return renderAdminSchemes();
+            if (adminTab === 'farmer') return renderAdminFarmer();
+            if (adminTab === 'water') return renderAdminWater();
+            if (adminTab === 'news') return renderAdminNews();
+            if (adminTab === 'complaints') return renderAdminComplaints();
+            if (adminTab === 'emergency') return renderAdminEmergency();
+            if (adminTab === 'users') return renderAdminUsers();
+        }
+
+        /* --- Admin: Schemes --- */
+        async function renderAdminSchemes() {
+            const res = await apiGet('schemes.php');
+            const schemes = Array.isArray(res) ? res : [];
+            cache.schemes = schemes;
+            const body = $('#adminTabBody');
+            body.innerHTML = `
+  <div class="section-title-row"><h3 style="margin:0;">योजना व्यवस्थापन</h3><button class="btn btn-gold btn-sm" onclick="openSchemeForm()">+ नवीन योजना जोडा</button></div>
+  <div class="table-wrap"><table><thead><tr><th>योजनेचे नाव</th><th>अंतिम तारीख</th><th></th></tr></thead><tbody>
+  ${schemes.length === 0 ? '<tr><td colspan="3" style="text-align:center; color:var(--ink-soft);">कोणतीही योजना नाही</td></tr>' : schemes.map(s => `
+    <tr><td><b>${escapeHtml(s.name)}</b></td><td>${escapeHtml(s.lastDate || '—')}</td>
+    <td style="white-space:nowrap;"><button class="btn btn-ghost btn-sm" onclick="openSchemeForm('${s.id}')">संपादित करा</button>
+    <button class="btn btn-danger btn-sm" onclick="deleteScheme('${s.id}')">काढा</button></td></tr>`).join('')}
+  </tbody></table></div>`;
+        }
+        function openSchemeForm(id) {
+            const s = id ? cache.schemes.find(x => x.id === id) : null;
+            openModal(`
+  <h3>${s ? 'योजना संपादित करा' : 'नवीन योजना जोडा'}</h3>
+  <form onsubmit="saveScheme(event,'${id || ''}')">
+    <div class="form-group"><label>योजनेचे नाव *</label><input class="input" name="name" required value="${s ? escapeHtml(s.name) : ''}"></div>
+    <div class="form-group"><label>वर्णन *</label><textarea class="textarea" name="description" required>${s ? escapeHtml(s.description) : ''}</textarea></div>
+    <div class="form-group"><label>पात्रता *</label><textarea class="textarea" name="eligibility" required>${s ? escapeHtml(s.eligibility) : ''}</textarea></div>
+    <div class="form-group"><label>आवश्यक कागदपत्रे *</label><textarea class="textarea" name="documents" required>${s ? escapeHtml(s.documents) : ''}</textarea></div>
+    <div class="form-row">
+      <div class="form-group"><label>अंतिम तारीख</label><input class="input" name="lastDate" value="${s ? escapeHtml(s.lastDate) : ''}"></div>
+      <div class="form-group"><label>अर्ज लिंक</label><input class="input" name="applyLink" value="${s ? escapeHtml(s.applyLink) : ''}"></div>
+    </div>
+    <button class="btn btn-primary btn-block" type="submit">जतन करा</button>
+  </form>`);
+        }
+        async function saveScheme(event, id) {
+            event.preventDefault();
+            const f = event.target;
+            const payload = {
+                id: id || undefined,
+                name: f.name.value.trim(), description: f.description.value.trim(),
+                eligibility: f.eligibility.value.trim(), documents: f.documents.value.trim(),
+                lastDate: f.lastDate.value.trim(), applyLink: f.applyLink.value.trim(),
+            };
+            const res = await apiPost('schemes.php', payload);
+            if (res.error) { toast(res.error, 'error'); return; }
+            closeModal(); toast('योजना जतन झाली', 'success'); renderAdminSchemes();
+        }
+        async function deleteScheme(id) {
+            if (!confirm('ही योजना कायमची काढायची आहे का?')) return;
+            const res = await apiDelete('schemes.php', { id });
+            if (res.error) { toast(res.error, 'error'); return; }
+            toast('योजना काढली', 'success'); renderAdminSchemes();
+        }
+
+        /* --- Admin: Farmer/Crops --- */
+        async function renderAdminFarmer() {
+            const [cropsRes, settingsRes] = await Promise.all([apiGet('crops.php'), apiGet('village_settings.php')]);
+            const crops = Array.isArray(cropsRes) ? cropsRes : [];
+            const settings = (settingsRes && !settingsRes.error) ? settingsRes : { lat: 19.9975, lon: 73.7898, villageName: 'आपले गाव' };
+            cache.crops = crops; cache.settings = settings;
+            const body = $('#adminTabBody');
+            body.innerHTML = `
+  <div class="section-title-row"><h3 style="margin:0;">पीक माहिती व्यवस्थापन</h3><button class="btn btn-gold btn-sm" onclick="openCropForm()">+ नवीन पीक जोडा</button></div>
+  <div class="table-wrap"><table><thead><tr><th>पीक</th><th>हंगाम</th><th>दर</th><th></th></tr></thead><tbody>
+  ${crops.length === 0 ? '<tr><td colspan="4" style="text-align:center; color:var(--ink-soft);">माहिती नाही</td></tr>' : crops.map(c => `
+    <tr><td><b>${escapeHtml(c.name)}</b></td><td>${escapeHtml(c.season)}</td><td>${escapeHtml(c.price)}</td>
+    <td style="white-space:nowrap;"><button class="btn btn-ghost btn-sm" onclick="openCropForm('${c.id}')">संपादित करा</button>
+    <button class="btn btn-danger btn-sm" onclick="deleteCrop('${c.id}')">काढा</button></td></tr>`).join('')}
+  </tbody></table></div>
+ 
+  <h3 style="margin-top:26px;">गाव सेटिंग्ज (हवामानासाठी)</h3>
+  <div class="card" style="max-width:460px;">
+    <form onsubmit="saveVillageSettings(event)">
+      <div class="form-group"><label>गावाचे नाव</label><input class="input" name="villageName" value="${escapeHtml(cache.settings ? cache.settings.villageName : 'आपले गाव')}"></div>
+      <div class="form-row">
+        <div class="form-group"><label>Latitude</label><input class="input" name="lat" type="number" step="any" value="${cache.settings ? cache.settings.lat : 19.9975}"></div>
+        <div class="form-group"><label>Longitude</label><input class="input" name="lon" type="number" step="any" value="${cache.settings ? cache.settings.lon : 73.7898}"></div>
+      </div>
+      <button class="btn btn-outline" type="submit">सेटिंग्ज जतन करा</button>
+    </form>
+  </div>`;
+        }
+        function openCropForm(id) {
+            const c = id ? cache.crops.find(x => x.id === id) : null;
+            openModal(`
+  <h3>${c ? 'पीक संपादित करा' : 'नवीन पीक जोडा'}</h3>
+  <form onsubmit="saveCrop(event,'${id || ''}')">
+    <div class="form-group"><label>पिकाचे नाव *</label><input class="input" name="name" required value="${c ? escapeHtml(c.name) : ''}"></div>
+    <div class="form-group"><label>हंगाम *</label><input class="input" name="season" required value="${c ? escapeHtml(c.season) : ''}" placeholder="उदा. खरीप / रब्बी"></div>
+    <div class="form-group"><label>अंदाजे दर</label><input class="input" name="price" value="${c ? escapeHtml(c.price) : ''}"></div>
+    <div class="form-group"><label>टिप्स</label><textarea class="textarea" name="tips">${c ? escapeHtml(c.tips) : ''}</textarea></div>
+    <button class="btn btn-primary btn-block" type="submit">जतन करा</button>
+  </form>`);
+        }
+        async function saveCrop(event, id) {
+            event.preventDefault();
+            const f = event.target;
+            const payload = { id: id || undefined, name: f.name.value.trim(), season: f.season.value.trim(), price: f.price.value.trim(), tips: f.tips.value.trim() };
+            const res = await apiPost('crops.php', payload);
+            if (res.error) { toast(res.error, 'error'); return; }
+            closeModal(); toast('पीक माहिती जतन झाली', 'success'); renderAdminFarmer();
+        }
+        async function deleteCrop(id) {
+            if (!confirm('हे पीक काढायचे आहे का?')) return;
+            const res = await apiDelete('crops.php', { id });
+            if (res.error) { toast(res.error, 'error'); return; }
+            toast('काढले', 'success'); renderAdminFarmer();
+        }
+        async function saveVillageSettings(event) {
+            event.preventDefault();
+            const f = event.target;
+            const payload = { villageName: f.villageName.value.trim(), lat: parseFloat(f.lat.value), lon: parseFloat(f.lon.value) };
+            const res = await apiPost('village_settings.php', payload);
+            if (res.error) { toast(res.error, 'error'); return; }
+            cache.settings = payload;
+            toast('सेटिंग्ज जतन झाल्या', 'success');
+        }
+
+        /* --- Admin: Water --- */
+        async function renderAdminWater() {
+            const res = await apiGet('water.php');
+            const w = (res && !res.error) ? res : { timing: '', tankLevel: 0, notice: '', alert: '' };
+            cache.water = w;
+            const body = $('#adminTabBody');
+            body.innerHTML = `
+  <h3>पाणीपुरवठा स्थिती अद्ययावत करा</h3>
+  <div class="card" style="max-width:520px;">
+    <form onsubmit="saveWaterStatus(event)">
+      <div class="form-group"><label>आजची पाणीपुरवठा वेळ</label><input class="input" name="timing" value="${escapeHtml(w.timing)}"></div>
+      <div class="form-group"><label>टाकीची पाणी पातळी (%)</label><input class="input" type="number" min="0" max="100" name="tankLevel" value="${w.tankLevel}"></div>
+      <div class="form-group"><label>देखभाल सूचना</label><textarea class="textarea" name="notice">${escapeHtml(w.notice)}</textarea></div>
+      <div class="form-group"><label>इशारा (असल्यास)</label><input class="input" name="alert" value="${escapeHtml(w.alert)}"></div>
+      <button class="btn btn-primary" type="submit">अद्ययावत करा</button>
+    </form>
+  </div>`;
+        }
+        async function saveWaterStatus(event) {
+            event.preventDefault();
+            const f = event.target;
+            const payload = { timing: f.timing.value.trim(), tankLevel: parseInt(f.tankLevel.value) || 0, notice: f.notice.value.trim(), alert: f.alert.value.trim() };
+            const res = await apiPost('water.php', payload);
+            if (res.error) { toast(res.error, 'error'); return; }
+            toast('पाणीपुरवठा स्थिती अद्ययावत झाली', 'success'); renderAdminWater();
+        }
+
+        /* --- Admin: News --- */
+        async function renderAdminNews() {
+            const res = await apiGet('news.php');
+            const news = (Array.isArray(res) ? res : []).sort((a, b) => new Date(b.date) - new Date(a.date));
+            cache.news = news;
+            const body = $('#adminTabBody');
+            body.innerHTML = `
+  <div class="section-title-row"><h3 style="margin:0;">बातम्या व्यवस्थापन</h3><button class="btn btn-gold btn-sm" onclick="openNewsForm()">+ नवीन बातमी जोडा</button></div>
+  <div class="table-wrap"><table><thead><tr><th>शीर्षक</th><th>प्रकार</th><th>तारीख</th><th></th></tr></thead><tbody>
+  ${news.length === 0 ? '<tr><td colspan="4" style="text-align:center; color:var(--ink-soft);">बातम्या नाहीत</td></tr>' : news.map(n => `
+    <tr><td><b>${escapeHtml(n.title)}</b></td><td>${escapeHtml(n.category)}</td><td>${formatDate(n.date)}</td>
+    <td style="white-space:nowrap;"><button class="btn btn-ghost btn-sm" onclick="openNewsForm('${n.id}')">संपादित करा</button>
+    <button class="btn btn-danger btn-sm" onclick="deleteNews('${n.id}')">काढा</button></td></tr>`).join('')}
+  </tbody></table></div>`;
+        }
+        function openNewsForm(id) {
+            const n = id ? cache.news.find(x => x.id === id) : null;
+            openModal(`
+  <h3>${n ? 'बातमी संपादित करा' : 'नवीन बातमी जोडा'}</h3>
+  <form onsubmit="saveNews(event,'${id || ''}')">
+    <div class="form-group"><label>शीर्षक *</label><input class="input" name="title" required value="${n ? escapeHtml(n.title) : ''}"></div>
+    <div class="form-group"><label>प्रकार *</label>
+      <select class="select" name="category" required>
+        ${['ग्रामसभा सूचना', 'सण-उत्सव', 'शालेय अपडेट', 'आरोग्य शिबिर', 'कृषी बातम्या', 'इतर'].map(c => `<option ${n && n.category === c ? 'selected' : ''}>${c}</option>`).join('')}
+      </select>
+    </div>
+    <div class="form-group"><label>तपशील *</label><textarea class="textarea" name="content" required>${n ? escapeHtml(n.content) : ''}</textarea></div>
+    <button class="btn btn-primary btn-block" type="submit">जतन करा</button>
+  </form>`);
+        }
+        async function saveNews(event, id) {
+            event.preventDefault();
+            const f = event.target;
+            const payload = { id: id || undefined, title: f.title.value.trim(), category: f.category.value, content: f.content.value.trim() };
+            const res = await apiPost('news.php', payload);
+            if (res.error) { toast(res.error, 'error'); return; }
+            closeModal(); toast('बातमी जतन झाली', 'success'); renderAdminNews();
+        }
+        async function deleteNews(id) {
+            if (!confirm('ही बातमी काढायची आहे का?')) return;
+            const res = await apiDelete('news.php', { id });
+            if (res.error) { toast(res.error, 'error'); return; }
+            toast('काढली', 'success'); renderAdminNews();
+        }
+
+        /* --- Admin: Complaints --- */
+        async function renderAdminComplaints() {
+            const res = await apiGet('complaints.php');
+            const complaints = (Array.isArray(res) ? res : []).sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+            cache.complaints = complaints;
+            const body = $('#adminTabBody');
+            body.innerHTML = `
+  <h3>तक्रार व्यवस्थापन</h3>
+  ${complaints.length === 0 ? '<div class="empty-state"><h4>अद्याप कोणतीही तक्रार नोंदवलेली नाही</h4></div>' : complaints.map(c => `
+    <div class="card" style="margin-bottom:14px;">
+      <div class="section-title-row" style="margin-bottom:8px;">
+        <div><b>${escapeHtml(c.type)}</b> — ${escapeHtml(c.citizenName)} (${escapeHtml(c.phone)})<div class="notice-meta">तक्रार क्र. ${c.id.slice(-6).toUpperCase()} · ${formatDateTime(c.createdAt)}</div></div>
+        <span class="badge ${c.status === 'निकाली' ? 'badge-resolved' : (c.status === 'प्रगतीपथावर' ? 'badge-progress' : 'badge-pending')}">${escapeHtml(c.status)}</span>
+      </div>
+      <p style="font-size:.92rem;">${escapeHtml(c.description)}</p>
+      ${c.photo ? `<img src="${c.photo}" style="max-width:180px; border-radius:8px; margin-bottom:10px; display:block;">` : ''}
+      <form onsubmit="updateComplaint(event,'${c.id}')" class="form-row" style="align-items:end;">
+        <div class="form-group" style="margin-bottom:0;"><label>स्थिती बदला</label>
+          <select class="select" name="status">
+            ${['प्रलंबित', 'प्रगतीपथावर', 'निकाली'].map(s => `<option ${c.status === s ? 'selected' : ''}>${s}</option>`).join('')}
+          </select>
+        </div>
+        <div class="form-group" style="margin-bottom:0;"><label>प्रतिसाद</label><input class="input" name="adminReply" value="${escapeHtml(c.adminReply || '')}" placeholder="नागरिकासाठी प्रतिसाद लिहा"></div>
+        <button class="btn btn-primary btn-sm" type="submit" style="height:44px;">अद्ययावत करा</button>
+      </form>
+    </div>`).join('')}`;
+        }
+        async function updateComplaint(event, id) {
+            event.preventDefault();
+            const f = event.target;
+            const payload = { id, status: f.status.value, adminReply: f.adminReply.value.trim() };
+            const res = await apiPut('complaints.php', payload);
+            if (res.error) { toast(res.error, 'error'); return; }
+            toast('तक्रार अद्ययावत झाली', 'success'); renderAdminComplaints();
+        }
+
+        /* --- Admin: Emergency --- */
+        async function renderAdminEmergency() {
+            const res = await apiGet('emergency.php');
+            const contacts = Array.isArray(res) ? res : [];
+            cache.emergency = contacts;
+            const body = $('#adminTabBody');
+            body.innerHTML = `
+  <h3>आपत्कालीन संपर्क अद्ययावत करा</h3>
+  <div class="card">
+  <form onsubmit="saveEmergency(event)">
+    ${contacts.map((c, i) => `
+      <div class="form-row" style="align-items:end;">
+        <div class="form-group"><label>${escapeHtml(c.type)}</label><input class="input" name="name_${i}" value="${escapeHtml(c.name)}"></div>
+        <div class="form-group"><label>क्रमांक</label><input class="input" name="number_${i}" value="${escapeHtml(c.number)}"></div>
+      </div>`).join('')}
+    <button class="btn btn-primary" type="submit">सर्व जतन करा</button>
+  </form>
+  </div>`;
+        }
+        async function saveEmergency(event) {
+            event.preventDefault();
+            const f = event.target;
+            const updated = cache.emergency.map((c, i) => ({ id: c.id, type: c.type, name: f['name_' + i].value.trim(), number: f['number_' + i].value.trim() }));
+            const res = await apiPost('emergency.php', { contacts: updated });
+            if (res.error) { toast(res.error, 'error'); return; }
+            toast('आपत्कालीन संपर्क अद्ययावत झाले', 'success'); renderAdminEmergency();
+        }
+
+        /* --- Admin: Users --- */
+        async function renderAdminUsers() {
+            const res = await apiGet('users.php');
+            const users = Array.isArray(res) ? res : [];
+            cache.users = users;
+            const body = $('#adminTabBody');
+            body.innerHTML = `
+  <h3>नोंदणीकृत नागरिक (${users.length})</h3>
+  <div class="table-wrap"><table><thead><tr><th>नाव</th><th>मोबाईल</th><th>पत्ता</th><th>नोंदणी तारीख</th></tr></thead><tbody>
+  ${users.length === 0 ? '<tr><td colspan="4" style="text-align:center; color:var(--ink-soft);">कोणतीही नोंदणी नाही</td></tr>' : users.map(u => `
+    <tr><td>${escapeHtml(u.fullName)}</td><td class="num">${escapeHtml(u.phone)}</td><td>${escapeHtml(u.address || '—')}</td><td>${formatDate(u.createdAt)}</td></tr>`).join('')}
+  </tbody></table></div>
+ 
+  <h3 style="margin-top:26px;">ॲडमिन पासवर्ड बदला</h3>
+  <div class="card" style="max-width:420px;">
+    <form onsubmit="changeAdminPassword(event)">
+      <div class="form-group"><label>नवीन पासवर्ड</label><input class="input" type="password" name="newPassword" required minlength="4"></div>
+      <button class="btn btn-outline" type="submit">पासवर्ड बदला</button>
+    </form>
+  </div>`;
+        }
+        async function changeAdminPassword(event) {
+            event.preventDefault();
+            const f = event.target;
+            const res = await apiPost('change_admin_password.php', { newPassword: f.newPassword.value });
+            if (res.error) { toast(res.error, 'error'); return; }
+            toast('पासवर्ड यशस्वीरित्या बदलला', 'success');
+            event.target.reset();
+        }
+
+        /* ============================= INIT ============================= */
+        async function init() {
+            $('#yearNow').textContent = new Date().getFullYear();
+            $('#footerWarli').innerHTML = warliStripSVG(true);
+            await loadSession();
+            renderHeaderActions();
+            route();
+        }
+        init();
+    </script>
+</body>
+</html>
