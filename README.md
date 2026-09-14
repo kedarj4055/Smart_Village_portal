@@ -105,7 +105,7 @@ Add screenshots of your deployed project here.
 
 ### Government Schemes
 
-![Government Schemes](schemes.png)
+![Government Schemes](schema.png)
 
 ### Farmer Information
 
